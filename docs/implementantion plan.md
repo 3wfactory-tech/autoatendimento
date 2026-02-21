@@ -39,14 +39,15 @@ Utilizaremos um **Monorepo** para gerenciar todas as partes da aplicação com e
 ### Fase 2: WhatsApp Gateway & Messaging (Semana 2)
 
 - [ ] Implementação do serviço de conexão WhatsApp usando **Baileys**.
-- [ ] Sistema de gestão de sessões Multi-tenant (armazenar `auth_state` no Supabase por tenant).
+- [ ] **Segurança**: Sistema de criptografia AES-256 para os arquivos de sessão (`auth_state`) antes de salvar no Supabase.
 - [ ] Fluxo de pareamento via QR Code no Dashboard.
-- [ ] Webhook para captura de mensagens recebidas e envio de respostas.
-- [ ] Sistema de fila (BullMQ/Redis) para garantir que nenhuma mensagem seja perdida.
+- [ ] Webhook para captura de mensagens e envio de respostas.
+- [ ] Sistema de fila (BullMQ/Redis - Free Tier Upstash) para garantir entrega.
 
 ### Fase 3: IA Sales Agent (LangChain + Vertex AI Gemini) (Semana 3)
 
 - [ ] Implementação do Agente de Vendas com Vertex AI Gemini.
+- [ ] **Google Search Grounding / Catalog Grounding**: Integrar a busca semântica do catálogo diretamente no prompt do Gemini para máxima precisão.
 - [ ] **Tools & Functions** integradas ao LangChain:
   - `qualify_lead(data)`: Avalia se o lead é quente/morno/frio e atualiza o DB.
   - `search_catalog(query)`: Busca semântica no catálogo (RAG com pgvector).
@@ -66,11 +67,13 @@ Utilizaremos um **Monorepo** para gerenciar todas as partes da aplicação com e
 - [ ] Dashboard de Métricas: Gráficos de conversão, leads qualificados e ROI.
 - [ ] Interface de Conversas Ativas: Visualização em tempo real e handoff manual.
 
-### Fase 5: Refinamento e Áudio (Semana 5)
+### Fase 5: Refinamento, Áudio e Observabilidade (Semana 5)
 
-- [ ] Integração de áudio:
-  - Transcrição de áudio recebido (**Whisper**).
-  - Síntese de voz para respostas (ElevenLabs ou similar).
+- [ ] Integração de áudio (Whisper + Google TTS).
+- [ ] **Observabilidade Gratuita**:
+  - **Sentry (Free)**: Monitoramento de erros e performance.
+  - **Better Stack (Free)**: Uptime monitoring e Logs.
+  - **LangSmith (Free Tier)**: Tracing de chamadas da IA e custo de tokens.
 - [ ] Testes E2E com Playwright.
 - [ ] Otimizações de performance e tratamento de erros (rate limits da Anthropic).
 - [ ] Deploy em produção (Vercel para apps, Railway/Supabase para API/DB).

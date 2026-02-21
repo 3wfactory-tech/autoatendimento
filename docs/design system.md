@@ -3,6 +3,7 @@
 ## 1. Fundamentos de Design
 
 ### 1.1 Princípios de UX
+
 - **Simplicidade**: Interface intuitiva para PMEs sem expertise técnica
 - **Velocidade**: Onboarding <10min, respostas <3s visíveis
 - **Confiança**: Transparência em decisões da IA, métricas claras
@@ -10,6 +11,7 @@
 - **Ação Facilitada**: CTAs claros, fluxos no-code sem fricção
 
 ### 1.2 Persona do Usuário
+
 - Proprietário PME, 35-55 anos, mobile-first user
 - Baixa tolerância a complexidade, alta demanda por resultados
 - Busca autonomia 24/7 com suporte humano disponível
@@ -22,6 +24,7 @@
 ### 2.1 Sistema de Cores
 
 #### Paleta Principal
+
 ```
 Cor Primária: #0EA5E9 (Sky Blue)
 ├─ Light: #E0F2FE (bg-sky-50)
@@ -39,11 +42,17 @@ Cor Alerta: #F59E0B (Amber - Atenção)
 
 Cor Erro: #EF4444 (Red - Bloqueio)
 
-Neutros:
+Neutros (Light Mode):
 ├─ Texto: #1F2937 (gray-800)
 ├─ Secundário: #6B7280 (gray-500)
 ├─ Bordas: #E5E7EB (gray-200)
 └─ Fundo: #FFFFFF / #F9FAFB (gray-50)
+
+Neutros (Dark Mode):
+├─ Texto: #F9FAFB (slate-50)
+├─ Secundário: #94A3B8 (slate-400)
+├─ Bordas: #334155 (slate-700)
+└─ Fundo: #0F172A / #1E293B (slate-900/800)
 ```
 
 **Justificativa**: Sky Blue projeta confiança tech, Emerald reforça sucesso (conversões), cores quentes para urgência.
@@ -249,6 +258,7 @@ Animação:
 ### 3.7 Navigation
 
 #### Top Navigation (Header)
+
 ```
 Height: 64px
 Background: white, border-bottom 1px gray-200
@@ -266,6 +276,7 @@ Responsive:
 ```
 
 #### Sidebar (Dashboard)
+
 ```
 Width: 256px (desktop), slide-out modal (mobile)
 Background: white, border-right 1px gray-200
@@ -471,7 +482,9 @@ Abas:
 │  ├─ Qualificar lead: on/off toggle
 │  ├─ Enviar pagamento: integração (Stripe/PagSeguro)
 │  ├─ Agendar: integração (Calendly/Google)
-│  └─ Handoff: ativar chat com humano
+│  ├─ Handoff: ativar chat com humano
+│  ├─ Notificação: Som de alerta + Banner persistente "Handoff Solicitado"
+│  └─ Botão: "Assumir Conversa" em Emerald-500
 │
 └─ Integrações
    ├─ CRM: HubSpot/Pipedrive (conectar)
@@ -538,6 +551,11 @@ Inline: spinner + text
 └─ Text: "Carregando...", "Salvando..."
 
 Delayed: mostrar after 300ms (evita flicker rápido)
+
+IA Thinking State:
+├─ No chat: Bubble cinza com animação de 3 pontos pulsantes.
+├─ No Dashboard: Badge "Agente processando..." no card do lead atual.
+└─ Texto subjacente: "Analisando catálogo...", "Gerando link de pagamento..."
 ```
 
 ### 5.3 Validação e Erros
@@ -842,6 +860,7 @@ Não conectado:
 ## 11. Guia de Implementação
 
 ### 11.1 Stack Recomendado
+
 - **Frontend**: Next.js 15 + Tailwind CSS + Shadcn/ui
 - **Icons**: Heroicons ou Feather Icons
 - **Componentes**: Radix UI (unstyled) + custom Tailwind
@@ -851,6 +870,7 @@ Não conectado:
 - **Animations**: Framer Motion (uso moderado)
 
 ### 11.2 Arquitetura de Componentes
+
 ```
 /components
 ├─ /ui (primitivos Shadcn)
@@ -870,6 +890,7 @@ Não conectado:
 ```
 
 ### 11.3 Página Checklist
+
 - [ ] Heading structure (h1 > h2 > h3)
 - [ ] Color contrast (4.5:1 padrão, 3:1 large)
 - [ ] Focus visible (2px sky outline)
@@ -887,6 +908,7 @@ Não conectado:
 ## 12. Conclusão
 
 Este Design System prioriza:
+
 1. **Simplicidade**: UI intuitiva, sem poluição, foco em ação
 2. **Performance**: < 2s resposta, visuais leves (fonts, shadows moderados)
 3. **Confiança**: Transparência via badges/status, erros claros

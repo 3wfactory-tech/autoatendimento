@@ -47,11 +47,19 @@ Analytics: Google Analytics, WhatsApp Insights.
 Requisitos Não-Funcionais
 Performance: <2s resposta, 1000+ conversas/dia/tenant (auto-scale).
 
-Segurança: Multi-tenant isolado (PostgreSQL row-level), GDPR/LGPD, criptografia mensagens.
+Segurança e Isolamento:
 
-Escalabilidade: Serverless (Vercel/AWS Lambda).
+- Multi-tenant isolado via Supabase Row-Level Security (RLS).
+- Criptografia de Sessões WhatsApp: Como usamos Baileys (WhatsApp Web), os arquivos de sessão/auth_state devem ser criptografados antes de serem armazenados no DB.
+- Segurança Webhook (Futuro/API Oficial): Implementar verificação de assinatura (X-Hub-Signature) somente ao migrar para WhatsApp Cloud API.
 
-Uptime: 99.9%, monitoring Sentry.
+Escalabilidade e Observabilidade:
+
+- Serverless (Vercel/Railway).
+- Monitoramento Gratuito: Log Studio (Google Cloud), Sentry (Free Tier) para erros de frontend/backend e GlitchTip (alternativa open-source) ou Prometheus/Grafana (Self-hosted/Free tier).
+- Performance: <2s resposta, 1000+ conversas/dia/tenant (auto-scale).
+
+Uptime: 99.9%, monitoring Sentry Free.
 
 Idioma: PT-BR prioritário, suporte EN/ES.
 ​
@@ -80,8 +88,12 @@ Claude retorna action/text → execute function (ex: createLead) → responda Wh
 
 Banco: Tables: tenants, agents, conversations (JSON history), leads (score, stage).
 
-Claude Integration: Use Anthropic SDK, models claude-3.5-sonnet/haiku, tools para functions (ex: {"name": "qualify_lead", "parameters": {...}}).
-​
+Vertex AI Gemini Integration:
+
+- Modelos: gemini-1.5-flash (velocidade) ou gemini-1.5-pro (complexidade).
+- Grounding: Utilizar o catálogo de produtos armazenado no Supabase (pgvector) como contexto direto para reduzir alucinações.
+- Function Calling: Mapear ações de venda diretamente para funções do Vertex AI.
+  ​
 
 Dev Setup: npm init, npx create-next-app, Prisma migrate, env vars (ANTHROPIC_API_KEY, META_WHATSAPP_TOKEN).
 
